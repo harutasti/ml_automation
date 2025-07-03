@@ -1,0 +1,53 @@
+name: kaggle-agent
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  # Python version
+  - python=3.9
+  
+  # Data manipulation and analysis
+  - pandas>=1.3.0
+  - numpy>=1.21.0
+  
+  # Machine Learning
+  - scikit-learn>=1.0.0
+  - lightgbm>=3.0.0
+  - xgboost>=1.5.0
+  
+  # Optimization
+  - optuna>=3.0.0
+  
+  # Visualization
+  - matplotlib>=3.4.0
+  - seaborn>=0.11.0
+  
+  # Utilities
+  - tqdm>=4.62.0
+  - pyyaml>=6.0
+  - joblib>=1.1.0
+  - click>=8.0.0
+  
+  # Development tools (optional)
+  - jupyter
+  - ipykernel
+  - pytest
+  - black
+  - flake8
+  - mypy
+  
+  # Pip dependencies
+  - pip
+  - pip:
+    # Kaggle API
+    - kaggle>=1.5.12
+    
+    # CatBoost (better to install via pip)
+    - catboost>=1.0.0
+    
+    # Additional utilities
+    - python-dotenv
+    
+    # For development
+    - pytest-cov
+    - pytest-mock

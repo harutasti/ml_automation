@@ -1,0 +1,135 @@
+# Kaggle Automation Agent - Sample Configuration File
+# Copy this file to config.yaml and customize for your project
+
+project:
+  name: my-kaggle-project
+  competition: titanic  # Replace with your competition name
+  version: 0.1.0
+  description: "Automated ML pipeline for Kaggle competition"
+
+# Pipeline configuration
+pipeline:
+  auto_mode: true  # Run all stages automatically
+  
+  stages:
+    # Data download stage
+    data_download:
+      enabled: true
+      handle_auth: true  # Handle competition authentication
+    
+    # Exploratory Data Analysis
+    eda:
+      enabled: true
+      generate_report: true
+      save_plots: true
+      visualizations:
+        - correlation_heatmap
+        - missing_values
+        - target_distribution
+        - feature_distributions
+        - outlier_detection
+    
+    # Feature Engineering
+    feature_engineering:
+      enabled: true
+      auto_generate: true
+      methods:
+        - numeric_transforms      # Log, sqrt, polynomial features
+        - categorical_encoding    # One-hot, target encoding
+        - interaction_features    # Feature interactions
+        - datetime_features      # Extract from datetime columns
+        - text_features         # Basic text feature extraction
+      advanced_features:
+        target_encoding: true    # K-fold target encoding
+        frequency_encoding: true
+        clustering_features: true
+        pca_features: false      # Enable if needed
+        polynomial_degree: 2     # For polynomial features
+    
+    # Model Training
+    modeling:
+      enabled: true
+      algorithms:
+        - lgbm          # LightGBM
+        - xgboost       # XGBoost
+        - catboost      # CatBoost
+        - random_forest # Random Forest
+        # - logistic_regression  # For classification
+        # - ridge               # For regression
+        # - lasso               # For regression
+      cv_folds: 5
+      validation_strategy: stratified  # or 'kfold' for regression
+      optimize_hyperparameters: true
+      optimization_trials: 100  # Number of Optuna trials
+      create_ensemble: true
+      ensemble_methods:
+        - voting
+        - stacking
+        - blending
+    
+    # Submission generation
+    submission:
+      enabled: true
+      auto_submit: false  # Set to true to auto-submit to Kaggle
+      create_report: true
+
+# Optimization settings
+optimization:
+  hyperparameter_tuning:
+    enabled: true
+    method: optuna
+    n_trials: 100
+    timeout: 3600  # 1 hour timeout
+    n_jobs: -1     # Use all CPU cores
+    
+  feature_selection:
+    enabled: false  # Enable if needed
+    method: importance  # or 'mutual_info', 'rfe'
+    top_k: 50      # Keep top K features
+
+# Experiment tracking
+tracking:
+  experiments: true
+  save_all_models: true
+  save_predictions: true
+  log_metrics: true
+  
+# State management
+state_management:
+  auto_checkpoint: true
+  checkpoint_frequency: 1  # Checkpoint after every stage
+  max_checkpoints: 10     # Keep last 10 checkpoints
+
+# Resource management
+resources:
+  max_memory_gb: 16    # Maximum memory usage
+  n_jobs: -1          # Number of parallel jobs (-1 = all cores)
+  chunk_size: 50000   # For processing large datasets
+  reduce_memory: true # Optimize memory usage
+
+# Hooks configuration (optional)
+hooks:
+  # Example: Run custom code after EDA
+  # after_eda:
+  #   - path: hooks/custom_eda_analysis.py
+  #     function: analyze_custom_patterns
+  
+  # Example: Custom feature engineering
+  # before_feature_engineering:
+  #   - path: hooks/domain_features.py
+  #     function: add_domain_specific_features
+
+# Logging configuration
+logging:
+  level: INFO  # DEBUG, INFO, WARNING, ERROR
+  file: kaggle_agent.log
+  console: true
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+# Advanced settings
+advanced:
+  random_seed: 42
+  reproducible: true
+  gpu_enabled: false  # Set to true if GPU available
+  early_stopping_rounds: 100
+  verbose: 1

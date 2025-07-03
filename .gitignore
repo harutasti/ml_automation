@@ -1,0 +1,87 @@
+# Data files
+data/raw/*
+data/processed/*
+*.csv
+*.json
+*.pkl
+*.h5
+
+# Models
+models/*
+*.pth
+*.joblib
+
+# Logs
+logs/*
+*.log
+*_log.txt
+run_log.txt
+
+# Kaggle - IMPORTANT: Never commit API keys!
+.kaggle/
+kaggle.json
+.config/kaggle/
+~/.config/kaggle/
+
+# Test files
+test_*.py
+check_*.py
+inspect_*.py
+fix_*.py
+*_test.py
+find_*.py
+test_kaggle_direct.py
+check_competitions.py
+inspect_competition.py
+find_open_competitions.py
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv
+
+# Conda
+conda-meta/
+.conda/
+*.conda
+*.tar.bz2
+environment-freeze.yml
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project specific
+.kaggle_agent_state.yaml
+experiments/*/
+
+# Test and example projects
+test_*/
+*_test/
+test_kaggle_project/
+titanic-*/
+my-titanic-project/
+*-project/
+test_house_prices*/
+test_nlp*/
+test_spaceship*/
+
+# Environment files
+.env
+.env.local
+*.env
